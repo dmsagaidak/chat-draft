@@ -42,6 +42,7 @@ const ChatForm: React.FC<Props> = ({onSubmit}) => {
             label="Author"
             value={message.author}
             onChange={onFormChange}
+            required
           />
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={4}>
@@ -52,6 +53,7 @@ const ChatForm: React.FC<Props> = ({onSubmit}) => {
             label="Message"
             value={message.message}
             onChange={onFormChange}
+            required
           />
         </Grid>
         <Grid item xs>
