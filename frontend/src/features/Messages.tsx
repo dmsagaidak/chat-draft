@@ -1,10 +1,28 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useAppDispatch, useAppSelector} from "../app/hooks";
+import {selectMessages} from "./messagesSlice";
+import {fetchMessages} from "./messagesThunks";
+import {Grid} from "@mui/material";
+import MessageItem from "./Components/MessageItem";
 
 const Messages = () => {
-  return (
-    <div>
+  const dispatch = useAppDispatch();
+  const messages = useAppSelector(selectMessages);
 
-    </div>
+  useEffect(() => {
+    void dispatch(fetchMessages());
+  }, [dispatch])
+
+  return (
+    <>
+      <Grid container direction="column" spacing={2}>
+        {messages.map(message => (
+          <MessageItem
+            key={message.id}
+            message={message}/>
+        ))}
+      </Grid>
+    </>
   );
 };
 

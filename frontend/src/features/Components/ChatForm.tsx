@@ -35,7 +35,7 @@ const ChatForm: React.FC<Props> = ({onSubmit}) => {
       autoComplete="off"
       onSubmit={onFormSubmit}>
       <Grid container direction="column" spacing={2} sx={{mt: 2}}>
-        <Grid item xs>
+        <Grid item xs={12} sm={12} md={6} lg={4}>
           <TextField
             id="author"
             name="author"
@@ -44,7 +44,7 @@ const ChatForm: React.FC<Props> = ({onSubmit}) => {
             onChange={onFormChange}
           />
         </Grid>
-        <Grid item xs>
+        <Grid item xs={12} sm={12} md={6} lg={4}>
           <TextField
             multiline rows={3}
             id="message"

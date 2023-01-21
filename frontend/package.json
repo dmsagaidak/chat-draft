@@ -14,6 +14,7 @@
     "@types/react-dom": "^18.0.9",
     "axios": "^1.2.3",
     "bootstrap": "^5.2.2",
+    "dayjs": "^1.11.7",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
     "react-dom": "^18.2.0",

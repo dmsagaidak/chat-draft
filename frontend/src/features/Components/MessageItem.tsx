@@ -1,6 +1,8 @@
 import React from 'react';
 import {Message} from "../../types";
-import {Card} from "react-bootstrap";
+import dayjs from 'dayjs'
+
+import {Grid, Card, CardContent} from "@mui/material";
 
 interface Props {
   message: Message;
@@ -8,14 +10,18 @@ interface Props {
 
 const MessageItem: React.FC<Props> = ({message}) => {
   return (
-    <Card className="mt-2 p-2" style={{width: '70vw'}}>
-      <div style={{display: 'flex', flexDirection: 'row'}}>
-        <p style={{paddingRight: '30px'}}><b>Author: </b>{message.author}</p> <p><b>Time & date: </b>{message.datetime}</p>
-      </div>
-      <Card.Text>
-        {message.message}
-      </Card.Text>
-    </Card>
+    <Grid item xs={12} sm={12} md={6} lg={4} sx={{mt: 2}}>
+      <Card>
+        <CardContent>
+          <span><strong>Author: </strong>{message.author}</span>
+          <span style={{paddingLeft: '20px'}}>
+            <strong>Date & time:</strong> {dayjs(message.datetime).format('DD.MM.YYYY HH:mm:ss')}
+          </span>
+          <div>{message.message}</div>
+        </CardContent>
+      </Card>
+    </Grid>
+
   );
 };
 
