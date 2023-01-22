@@ -6,7 +6,6 @@ export const fetchMessages = createAsyncThunk<Message[]>(
   'messages/fetchAll',
   async () => {
     const response = await axiosApi.get<Message[]>('/');
-    console.log(response.data)
     return response.data;
   }
 );

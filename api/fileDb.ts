@@ -22,7 +22,7 @@ const fileDb = {
 
   async addItem(item: ApiMessage) {
     const id = randomUUID();
-    const datetime = new Date().toString();
+    const datetime = new Date().toISOString();
 
     const message = {
       id,

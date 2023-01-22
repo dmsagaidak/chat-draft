@@ -11,7 +11,9 @@ const Messages = () => {
 
   useEffect(() => {
     void dispatch(fetchMessages());
-  }, [dispatch])
+  }, [dispatch]);
+
+
 
   return (
     <>
