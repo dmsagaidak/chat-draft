@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
 import {ApiMessage} from "../../types";
 import {Button, Grid, TextField} from "@mui/material";
+import {useAppSelector} from "../../app/hooks";
+import {selectCreateLoading} from "../messagesSlice";
 
 interface Props {
  onSubmit: (message: ApiMessage) => void;
 }
 
 const ChatForm: React.FC<Props> = ({onSubmit}) => {
+  const createLoading = useAppSelector(selectCreateLoading);
+
   const [message, setMessage] = useState<ApiMessage>({
     message: '',
     author: '',
@@ -43,6 +47,7 @@ const ChatForm: React.FC<Props> = ({onSubmit}) => {
             value={message.author}
             onChange={onFormChange}
             required
+            disabled={createLoading}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={4}>
@@ -54,10 +59,16 @@ const ChatForm: React.FC<Props> = ({onSubmit}) => {
             value={message.message}
             onChange={onFormChange}
             required
+            disabled={createLoading}
           />
         </Grid>
         <Grid item xs>
-          <Button type="submit" color="primary" variant="contained">Send</Button>
+          <Button
+            type="submit"
+            color="primary"
+            variant="contained"
+            disabled={createLoading}
+          >Send</Button>
         </Grid>
       </Grid>
     </form>

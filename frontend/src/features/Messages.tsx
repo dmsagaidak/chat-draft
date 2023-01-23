@@ -1,23 +1,21 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../app/hooks";
-import {selectMessages, selectNewMessages} from "./messagesSlice";
-import {fetchMessages, fetchNew} from "./messagesThunks";
+import {selectMessages} from "./messagesSlice";
+import {fetchMessages} from "./messagesThunks";
 import {Grid} from "@mui/material";
 import MessageItem from "./Components/MessageItem";
 
 const Messages = () => {
   const dispatch = useAppDispatch();
   let messages = useAppSelector(selectMessages);
-  let newMessages = useAppSelector(selectNewMessages);
+  const [params, setParams] = useState('');
 
   useEffect(() => {
-    void dispatch(fetchMessages());
-    setInterval(() =>{dispatch(fetchNew());
-      messages = messages.concat(newMessages);
+    setInterval(()=> {dispatch(fetchMessages(params));
+      let lastDate = messages[messages.length -1].datetime;
+      setParams(lastDate);
       }, 3000)
-
-  }, [dispatch, newMessages]);
-
+  }, [dispatch]);
 
 
   return (
