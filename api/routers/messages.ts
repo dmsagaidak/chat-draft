@@ -14,6 +14,7 @@ messagesRouter.get('/', async (req, res) => {
     if(isNaN(date.getDate())){
       res.status(400).send({error: 'Invalid datetime'});
     }
+
     const messages = await fileDb.getItems();
     const lastDateMessage = messages.find(message => (message.datetime === req.query.datetime));
     const lastDateIndex = messages.indexOf(lastDateMessage!);
@@ -33,8 +34,6 @@ messagesRouter.get('/', async (req, res) => {
 
     res.send(data);
   }
-
-
 });
 
 
