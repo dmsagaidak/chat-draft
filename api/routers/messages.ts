@@ -7,28 +7,34 @@ let data: Message[] = [];
 
 
 messagesRouter.get('/', async (req, res) => {
-  const queryDate = req.query.datetime as string;
-  const date = new Date(queryDate);
-  if(isNaN(date.getDate())){
-    res.status(400).send({error: 'Invalid datetime'})
+  if (req.query.datetime) {
+    const queryDate = req.query.datetime as string;
+    const date = new Date(queryDate);
+
+    if(isNaN(date.getDate())){
+      res.status(400).send({error: 'Invalid datetime'});
+    }
+    const messages = await fileDb.getItems();
+    const lastDateMessage = messages.find(message => (message.datetime === req.query.datetime));
+    const lastDateIndex = messages.indexOf(lastDateMessage!);
+    data = messages.slice(lastDateIndex);
+    res.send(data);
+  } else {
+    const messages = await fileDb.getItems();
+
+    let lastMessages: Message[];
+
+    if(messages.length <= 30) {
+      lastMessages = messages;
+    }else {
+      lastMessages = messages.slice(-30);
+    }
+    data = lastMessages;
+
+    res.send(data);
   }
 
-  if (date) {
 
-  }
-
-  const messages = await fileDb.getItems();
-
-  let lastMessages: Message[];
-
-  if(messages.length <= 30) {
-    lastMessages = messages;
-  }else {
-    lastMessages = messages.slice(-30);
-  }
-  data = lastMessages;
-
-  res.send(data);
 });
 
 
